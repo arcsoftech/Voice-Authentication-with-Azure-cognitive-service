@@ -47,7 +47,7 @@ module.exports = {
         dashboardHandler: (req, res) => {
             res.render('dashboard', {
                 user: req.user,
-                title: "Express",
+                title: 'Voice Authentication'
             });
         }
     },
@@ -76,7 +76,7 @@ module.exports = {
                 // Set cookie
                 res.cookie('token', token, options1);
                 return res.render('signup', {
-                    title: 'Express',
+                    title: 'Voice Authentication',
                     popup: true
                 });
             });
@@ -128,7 +128,7 @@ module.exports = {
                         {
                             console.log("default user", user);
                             return res.render('signin', {
-                                title: 'Express',
+                                title: 'Voice Authentication',
                                 popup: true,
                                 user: user
                             });
