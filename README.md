@@ -5,7 +5,7 @@ This software demonstrates the voice based authentication using microsoft speake
 This software consist of two parts:-
 ## 1-NodeJS Web App
 
-I have demonstrated the voice autnetication in nodejs based web application which is hosted as [Microsoft Web App]
+I have demonstrated the voice authentication in nodejs based web application which is hosted as [Microsoft Web App]
 (https://docs.microsoft.com/azure/app-service-web).
 
 ## 2-Web Server
