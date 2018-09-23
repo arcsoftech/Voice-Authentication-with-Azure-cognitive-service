@@ -18,9 +18,9 @@ require('dotenv').config();
  * check if application is running online(Azure) or it is running in local environment.
  */
 
-if(process.env.APPSETTING_ENV)
+if(process.env.ENV === 'Azure')
 {
-  require('./azureWebAppConfig');
+  require('./azureWebAppConfig')();
 }
 const models = require("./models");
 const msService = require('./routes/microsoftService')(passport, models.Account);
