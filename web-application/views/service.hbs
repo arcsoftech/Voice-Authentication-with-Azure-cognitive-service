@@ -1,0 +1,163 @@
+{{!< main }}
+
+{{#contentFor 'head' }}
+<link href="css/service.css" rel="stylesheet">
+ <script src="bower_components/DataTable/angular-datatables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="bower_components/DataTable/datatables.bootstrap.css">
+    <!-- <link rel="stylesheet" type="text/css" href="Content/bower_components/DataTable/buttons.datatables.min.css" /> -->
+    <script src="bower_components/DataTable/dataTables.buttons.min.js"></script>
+    <script src="bower_components/DataTable/buttons.colVis.min.js"></script>
+    <script src="bower_components/DataTable/buttons.flash.min.js"></script>
+    <script src="bower_components/DataTable/buttons.print.min.js"></script>
+    <script src="bower_components/DataTable/buttons.html5.min.js"></script>
+    <script src="bower_components/DataTable/angular-datatables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/select/1.1.2/js/dataTables.select.min.js"></script>
+    <script src="js/altEditor/dataTables.altEditor.free.js"></script>
+
+    <link rel="stylesheet"  href= "https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.1/css/xeditable.min.css"/>
+    <!-- Custom Theme Style -->
+    <link rel="stylesheet"  href="css/custom.min.css" rel="stylesheet">
+ 
+{{/contentFor}}
+
+
+ <div class="right_col" role="main">
+
+                <div class="">
+                    <div class="clearfix"></div>
+<div class="box">
+        <div class="box-header with-border">
+         <h3 class="box-title ">Knowledge Base Manager</h3>
+
+        </div>
+        <div class="box-body">
+    
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="x_panel" style="height: auto;">
+                                <div class="x_title">
+                                    <h2>Knowledge Base<small class="ServiceName"></small></h2>
+                                    <ul class="nav navbar-right panel_toolbox">
+                                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                        </li>
+                                  
+                                        {{!-- <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                        </li> --}}
+                                    </ul>
+                                    <div class="clearfix"></div>
+                                </div>
+
+                                <div class="x_content" style="display: none;">
+                              
+
+                                    <table cellpadding="0" cellspacing="0" border="0" class="dataTable table table-striped table-bordered jambo_table" id="example">
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="x_panel" style="height: auto;">
+                                <div class="x_title">
+                                    <h2>Abbrevation List<small class="ServiceName"></small></h2>
+                                    <ul class="nav navbar-right panel_toolbox">
+                                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                        </li>
+                               
+                                        {{!-- <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                        </li> --}}
+                                    </ul>
+                                    <div class="clearfix"></div>
+                                </div>
+
+                                <div class="x_content" style="display: none;">
+                                   
+                                    <div ng-app="app" ng-controller="Ctrl">
+                                        <button class="btn btn-primary" ng-click="saveNtrain()"><i class="fa fa-save  fa-2x"></i><br>Save & Train</button>
+                                        <div id="example1_filter" class="dataTables_filter"><label><input type="text"  placeholder="search.." ng-model="search"></div>
+                                        <table cellpadding="0" cellspacing="0" border="0" class="datatable table table-striped table-bordered jambo_table" >
+                                <tr style="font-weight: bold;background: #405467;color: aliceblue;">
+                                                <td style="width:20%">Abbrevation</td>
+                                                <td style="width:50%">Meaning</td>
+                                                <td style="width:30%">Action</td>
+                                            </tr>
+                                            <tr ng-repeat="abbrevation in abbrevations  | filter: search">
+                                                <td>
+                                                    <!-- editable username (text with validation) -->
+                                                    <span editable-text="abbrevation.abbr" e-name="abbr" e-form="rowform"  e-required>
+                                                        \{{ abbrevation.abbr || 'empty' }}
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <!-- editable username (text with validation) -->
+                                                    <span editable-text="abbrevation.value" e-name="value" e-form="rowform"  e-required>
+                                                        \{{ abbrevation.value || 'empty' }}
+                                                    </span>
+                                                </td>
+
+                                                <td style="white-space: nowrap">
+                                                    <!-- form -->
+                                                    <form editable-form name="rowform"  ng-show="rowform.$visible" class="form-buttons form-inline"
+                                                        >
+                                                        <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
+                                                            <i class="fa fa-save  fa-2x" aria-hidden="true"></i><br>Save
+                                                        </button>
+                                                        <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default">
+                                                            <i class="fa fa-remove  fa-2x" aria-hidden="true"></i><br>Cancel
+                                                        </button>
+                                                    </form>
+                                                    <div class="buttons" ng-show="!rowform.$visible">
+                                                        <button class="btn btn-primary" ng-click="rowform.$show()"><i class="fa fa-edit  fa-2x"></i><br>Edit</button>
+                                                        <button class="btn btn-danger" ng-click="removeAbbr($index)"><i class="fa fa-trash-o  fa-2x" aria-hidden="true"></i><br>Delete</button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+
+                                        <button class="btn btn-default" ng-click="addAbbr()"><i class="fa fa-plus-square  fa-2x" aria-hidden="true"></i><br>Add row</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+          Note:Expand the above panel to view editors.
+        </div>
+        <!-- /.box-footer-->
+      </div>
+                </div>
+            </div>
+{{#contentFor 'pagescripts'}}
+ 
+
+    <!-- jQuery -->
+    <!-- <script src="../vendors/jquery/dist/jquery.min.js"></script> -->
+    <!-- Bootstrap -->
+    <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="vendors/nprogress/nprogress.js"></script>
+    <!-- iCheck -->
+    <script src="vendors/iCheck/icheck.min.js"></script>
+    <!-- Datatables -->
+    <script src="AdminPanel/ServiceView/service.js"></script>
+    <script src = "ABBRApp/ExternalModule/xeditable.js"></script>
+    <link rel="stylesheet" href="ABBRApp\ExternalModule\xeditable.css"/>
+    <script src = "ABBRApp/App/app.js"></script>
+    <script src = "ABBRApp/Services/GetAb.js"></script>
+    <script src = "ABBRApp/Services/PostAb.js"></script>
+    <script src = "ABBRApp/Config/AppConfig.js"></script>
+    <script src = "ABBRApp/Controller/ABBRController.js"></script>
+    <!-- Custom Theme Scripts -->
+   <script src="js/custom.min.js"></script>
+    <!-- </ng-app ng-app="ChatBot">
+    </ng-controller id="ctrl" ng-controller="ChatBotController"> -->
+    <div class="loader">
+        <!-- Place at bottom of page -->
+    </div>
+{{/contentFor}}
+

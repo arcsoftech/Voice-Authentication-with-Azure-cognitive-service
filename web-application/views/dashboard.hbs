@@ -1,0 +1,68 @@
+
+    <div class="preloader">
+        <div class="sk-folding-cube">
+            <div class="sk-cube1 sk-cube"></div>
+            <div class="sk-cube2 sk-cube"></div>
+            <div class="sk-cube4 sk-cube"></div>
+            <div class="sk-cube3 sk-cube"></div>
+        </div>
+    </div>
+
+    <!--Header-area-->
+    <header class="header-area overlay full-height relative v-center" id="home-page">
+        <div class="absolute anlge-bg"></div>
+        <div class="container">
+            <div class="row v-center">
+                <div class="col-xs-12 col-md-7 header-text">
+				<h2>Hello! {{user.firstname}} {{user.lastname}}</h2>
+                    <h4>Login Succesful!</h4>
+                    <h3>This application is proof of concept of voice authentication.</h3>
+                    <p>It leverages Microsoft speaker recognization cognitive service which claims 5.1% error rate.Voice authentication can be used in mobile app,website application,IOT application,etc. as an alternative mode of authentication.<br>For more details contact arihant_chhajed@yahoo.in.</p>
+                    <a href="logout" class="button white">Logout</a>
+                </div>
+               
+            </div>
+        </div>
+    </header>
+    <!--Header-area/-->
+
+    <footer class="footer-area relative sky-bg" id="contact-page">
+        <div class="absolute footer-bg"></div>
+        <!--div class="footer-top">
+            
+        </div-->
+        <!--div class="footer-middle">
+            
+        </div-->
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 text-center">
+                        <p>Developed by arcsoftech</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+{{#contentFor 'head' }}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+    <link rel="stylesheet" href="css/dashboard/style.css">
+    <link rel="stylesheet" href="css/dashboard/responsive.css">
+
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+{{/contentFor}}
+{{#contentFor 'pagescripts'}}
+    <script src="js/dashboard/wow.min.js"></script>
+    <!--Main-active-JS-->
+    <script src="js/dashboard/main.js"></script>
+{{/contentFor}}

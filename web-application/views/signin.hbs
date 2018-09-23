@@ -1,0 +1,89 @@
+<div class="container">
+    <div class="wrapper">
+        {{#if popup}}
+            <input id="profileId" type="hidden" value="{{user.profileId}}" />
+            <input id="voicePhrase" type="hidden" value="{{user.voicePhrase}}" />
+            <input id="emailid" type="hidden" value="{{user.email}}" />
+        {{else}}
+            <form id="signin" name="signin" method="post" action="signin" class="form-signin">
+                <h3 class="form-signin-heading">Welcome Back!</h3>
+                {{#if Error.length }}
+                    <div class="alert alert-danger alert-dismissable fade in">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Error!</strong>{{Error}}
+                    </div>
+                {{/if}}
+                <hr class="colorgraph"><br>
+                <label for="Email">Email</label>
+                <input class="form-control" class="text" name="email" type="text" autofocus="" />
+                <!--label for="password">Password</label>
+            <input class="form-control" name="password" type="password" /-->
+                <label></label>
+                <input class="btn btn-lg btn-primary btn-block" type="submit" value="Sign In" />
+            </form>
+        {{/if}}
+    </div>
+</div>
+{{#contentFor 'head' }}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="css/auth.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="js/audiodisplay.js"></script>
+    <script src="js/recorder.js"></script>
+    <style>
+        .popover-content {
+            OVERFLOW: scroll;
+            z-index: 99999999;
+            height: 200px;
+        }
+
+        .swal-wide {
+            width: 850px !important;
+        }
+
+        .instruction {
+            text-align: justify;
+        }
+
+        .instruction>li {
+            padding: 2%;
+        }
+
+        .badge {
+            display: inline-block;
+            min-width: 10px;
+            padding: 9px 0px 0px;
+            font-size: 16px;
+            line-height: 1;
+            color: #fff;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: baseline;
+            background-color: #1f6ea9;
+            /* font-weight: bold; */
+            border-radius: 5px 0px 0px 5px;
+            margin-top: 5px;
+            padding: 5px 3px 5px 9px;
+        }
+
+        .badge-nos {
+            font-size: 16px;
+            color: #fff;
+            border-radius: 0px 5px 5px 0px;
+            background-color: #926868;
+            padding: 2px 5px 2px 5px;
+        }
+
+    </style>
+{{/contentFor}}
+{{#contentFor 'pagescripts'}}
+    {{#if popup}}
+    <script src="js/main.js"></script>
+        <script src="js/signin.js"> 
+        </script>
+    {{/if}}
+{{/contentFor}}

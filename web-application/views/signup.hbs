@@ -1,0 +1,74 @@
+<div class="container">
+    <div class="wrapper">
+        {{#if popup}}
+        {{else}}
+            <form id="signup" name="signup" method="post" action="signup" class="form-signin">
+                <h3 class="form-signin-heading">Registration Form</h3>
+                {{#if Error.length }}
+                    <div class="alert alert-danger alert-dismissable fade in">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Error!</strong>{{Error}}
+                    </div>
+                {{/if}}
+                <hr class="colorgraph"><br>
+                <label for="email">Email Address</label>
+                <input class="form-control" class="text" name="email" type="email" />
+                <label for="firstname">Firstname</label>
+                <input class="form-control" name="firstname" type="text" />
+                <label for="lastname">Lastname</label>
+                <input class="form-control" name="lastname" type="text" />
+                <label for="username">Username</label>
+                <input class="form-control" name="username" type="text" />
+                <label for="password">Password</label>
+                <input class="form-control" name="password" type="password" />
+                <input class="btn btn-lg btn-primary btn-block" type="submit" value="Sign Up" />
+            </form>
+        {{/if}}
+    </div>
+</div>
+<div id="a1" class="hidden">
+    <div class="popover-heading">Phrases</div>
+    <div class="popover-body">
+        <table id="phraselist" class="table">
+        </table>
+    </div>
+</div>
+{{#contentFor 'head' }}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="css/auth.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="js/audiodisplay.js"></script>
+    <script src="js/recorder.js"></script>
+
+    <style>
+        .popover-content {
+            OVERFLOW: scroll;
+            z-index: 99999999;
+            height: 200px;
+        }
+
+        .swal-wide {
+            width: 850px !important;
+        }
+
+        .instruction {
+            text-align: justify;
+        }
+
+        .instruction>li {
+            padding: 2%;
+        }
+
+    </style>
+{{/contentFor}}
+{{#contentFor 'pagescripts'}}
+    {{#if popup}}
+        <script src="js/main.js"></script>
+        <script src="js/signup.js"> 
+        </script>
+    {{/if}}
+{{/contentFor}}
