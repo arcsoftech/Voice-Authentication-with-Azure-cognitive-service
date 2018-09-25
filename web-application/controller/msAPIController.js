@@ -99,7 +99,7 @@ module.exports = Account => {
                     }
                     var ConvertOptions = {
                         method: 'POST',
-                        url: `http://${process.env.APP_SERVER_USER}:${process.env.APP_SERVER_PASS}@${process.env.APP_SERVER}/convert`,
+                        url: `http://${process.env.APPLICATION_SERVER_USER}:${process.env.APPLICATION_SERVER_PASS}@${process.env.APPLICATION_SERVER}/convert`,
                         body: req.file.buffer
                     }
                     var options = {
@@ -146,7 +146,7 @@ module.exports = Account => {
                     }
                     var ConvertOptions = {
                         method: 'POST',
-                        url: `http://${process.env.APP_SERVER_USER}:${process.env.APP_SERVER_PASS}@${process.env.APP_SERVER}/convert`,
+                        url: `http://${process.env.APPLICATION_SERVER_USER}:${process.env.APPLICATION_SERVER_PASS}@${process.env.APPLICATION_SERVER}/convert`,
                         body: req.file.buffer
                     }
                     var options = {

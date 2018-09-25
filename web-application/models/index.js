@@ -3,8 +3,8 @@
 var fs = require("fs");
 var path = require("path");
 var Sequelize = require("sequelize");
-var sequelize = new Sequelize(process.env.DB, process.env.DB_USER, process.env.DB_PASS, {
-    host: process.env.APP_SERVER,
+var sequelize = new Sequelize(process.env.MY_DB, process.env.MY_DB_USER, process.env.MY_DB_PASS, {
+    host: process.env.APPLICATION_SERVER,
     port: 3306,
     dialect: 'mysql'
 });

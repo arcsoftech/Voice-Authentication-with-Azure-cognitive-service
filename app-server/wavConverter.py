@@ -14,6 +14,8 @@ APP = Flask(__name__)
 CORS(APP)
 login_manager = LoginManager()
 login_manager.init_app(APP)
+print(os.getenv("USER"))
+print(os.getenv("PASSWORD"))
 
 
 class User(UserMixin):
