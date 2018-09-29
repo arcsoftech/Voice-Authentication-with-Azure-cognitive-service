@@ -189,17 +189,7 @@ function initAudio() {
     if (!navigator.requestAnimationFrame)
         navigator.requestAnimationFrame = navigator.webkitRequestAnimationFrame || navigator.mozRequestAnimationFrame;
 
-    navigator.getUserMedia({
-        "audio": {
-            "mandatory": {
-                "googEchoCancellation": "false",
-                "googAutoGainControl": "false",
-                "googNoiseSuppression": "false",
-                "googHighpassFilter": "false"
-            },
-            "optional": []
-        },
-    }, gotStream, function (e) {
+    navigator.getUserMedia({audio: true}, gotStream, function (e) {
         alert('Error getting audio');
         console.log(e);
     });
