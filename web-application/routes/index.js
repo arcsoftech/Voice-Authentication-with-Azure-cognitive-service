@@ -19,7 +19,9 @@ const requestHandler = (req) => {
 }
 
 module.exports = passport => {
+
   /* GET*/
+
   router.get('/', indexController.GET.indexHandler);
   router.get('/signin', indexController.GET.signinHandler);
   router.get('/signup', indexController.GET.signupHandler);
@@ -28,16 +30,10 @@ module.exports = passport => {
     failureFlash: true,
     session: false
   }), indexController.GET.dashboardHandler);
-  router.get('/logout', (req, res) => {
-    req.session.destroy(function (err) {
-      res.clearCookie('token', {
-        path: '/'
-      });
+  router.get('/logout', indexController.GET.logoutHandler);
 
-      res.redirect('signin');
-    });
-  });
   /* POST*/
+
   router.post('/signin/:type?',
     [conditional(
       requestHandler,
@@ -55,6 +51,6 @@ module.exports = passport => {
     failureFlash: true,
     failureRedirect: 'signup'
   }), indexController.POST.signupHandler);
-  
+
   return router;
 }

@@ -22,6 +22,7 @@ module.exports = {
 
         signinHandler: (req, res) => {
             res.render('signin', {
+                Error: req.flash('error'),
                 title: 'Voice Authentication'
             });
         },
@@ -34,7 +35,24 @@ module.exports = {
 
         signupHandler: (req, res) => {
             res.render('signup', {
+                Error: req.flash('error'),
                 title: 'Voice Authentication'
+            });
+        },
+
+        /**
+         * Logout page handler.
+         * @param {Object} req Request Object
+         * @param {Object} res Response Object
+         */
+
+        logoutHandler: (req, res) => {
+            req.session.destroy(function (err) {
+                res.clearCookie('token', {
+                    path: '/'
+                });
+
+                res.redirect('signin');
             });
         },
 
@@ -66,6 +84,8 @@ module.exports = {
                     return next(err);
                 }
                 let options1 = {
+                    secure: process.env.ENV ==='Azure'? true:false,
+                    sameSite: true,
                     httpOnly: true, // The cookie only accessible by the web server
                     expires: new Date(Date.now() + 60 * 60 * 1000), // expires after 1 hour
                     ephemeral: true
@@ -100,6 +120,8 @@ module.exports = {
                     case 'pwd':
                         {
                             options = {
+                                secure: process.env.ENV ==='Azure'? true:false,
+                                sameSite: true,
                                 httpOnly: true, // The cookie only accessible by the web server
                                 expires: new Date(Date.now() + 60 * 60 * 1000), // expires after 1 hour
                                 ephemeral: true
@@ -112,6 +134,8 @@ module.exports = {
                         {
                             console.log("voice user", user)
                             options = {
+                                secure: process.env.ENV ==='Azure'? true:false,
+                                sameSite: true,
                                 httpOnly: true, // The cookie only accessible by the web server
                                 expires: new Date(Date.now() + 60 * 60 * 1000), // expires after 1 hour
                                 ephemeral: true

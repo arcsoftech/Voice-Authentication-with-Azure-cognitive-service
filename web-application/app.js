@@ -18,8 +18,7 @@ require('dotenv').config();
  * check if application is running online(Azure) or it is running in local environment.
  */
 
-if(process.env.ENV === 'Azure')
-{
+if (process.env.ENV === 'Azure') {
   require('./azureWebAppConfig')();
 }
 const models = require("./models");
@@ -35,23 +34,24 @@ models.sequelize.sync().then(function (res) {
  * App Settings.
  */
 
-let expiryDate = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
+// let expiryDate = new Date(Date.now() + 60 * 60 * 1000 * 1000);
 app.use(
   session({
-    name: 'SESS_ID',
-    secret: "voice",
+    secret: "eg[isfd-8yF9-7w2315df{}+Ijsli;;to8",
     resave: true,
     saveUninitialized: true,
     cookie: {
-      expires: expiryDate,
-      ephemeral: true
+       secure: process.env.ENV ==='Azure'? true:false,
+       httpOnly: true,
+       maxAge: 60000000,
+       sameSite: true,
+       ephemeral: true
     }
   })
 ); // session secret
 
 app.use(bearerToken());
-app.use(passport.initialize());
-app.use(passport.session());
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -66,6 +66,8 @@ app.engine(
   })
 );
 app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
 require('./lib/handlebarHelpers')
   .helpers(exphbs);
 app.set('view engine', 'hbs');
@@ -81,25 +83,36 @@ app.use(bodyParser.urlencoded({
 
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.all('*', function (req, res, next) {
+  console.log("Session Generated",req.session);
+  console.log("SessionId",req.sessionID);
+  next(); // pass control to the next handler
+});
 app.use('/', index);
 app.use('/voice', msService);
 
 
 
-app.use( (req, res, next)=> {
+app.use((req, res, next) => {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
-});// catch 404 and forward to error handler
+}); // catch 404 and forward to error handler
 
 
-app.use( (err, req, res, next)=> {
+app.use((err, req, res, next) => {
   console.log(err)
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
   res.status(err.status || 500);
-  res.render('error');
-});// error handler
+  res.clearCookie('token', {
+    path: '/'
+  });
+  res.clearCookie('SESS_ID', {
+    path: '/'
+  });
+  res.render('error',{ message: err.message,
+    error: err});
+}); // error handler
 
 module.exports = app;

@@ -13,7 +13,11 @@
    limitations under the License.
 */
 
-window.AudioContext = window.AudioContext || window.webkitAudioContext;
+window.AudioContext = window.AudioContext ||
+    window.webkitAudioContext ||
+    window.mozAudioContext ||
+    window.oAudioContext ||
+    window.msAudioContext;
 
 var audioContext;
 var audioInput = null,
@@ -174,7 +178,7 @@ function gotStream(stream) {
     zeroGain.gain.value = 0.0;
     inputPoint.connect(zeroGain);
     zeroGain.connect(audioContext.destination);
-    updateAnalysers();
+    // updateAnalysers();
 }
 
 function initAudio() {

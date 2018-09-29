@@ -155,8 +155,9 @@ module.exports = function (passport, Account) {
                     email: email
                 }
             }).then(function (user) {
+                console.log("user query output:-",user)
                 if (!user) {
-                    console.log(user)
+                    console.log("User not found")
                     return done(null, false, {
                         message: 'Email does not exist'
                     });
