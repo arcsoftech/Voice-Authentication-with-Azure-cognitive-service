@@ -45,6 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                 credentials: 'same-origin'
                             })
                             .then(function (res) {
+                                console.log("response".res);
                                 return res.json();
                             })
                             .then(function (data) {

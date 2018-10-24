@@ -196,7 +196,7 @@ function initAudio() {
 }
 window.voiceInputTemplate = _.template(`<div class="col-sm-5">
 <div id="viz">
-  <%= signup? '<a href="#" class="btn btn-primary" tabindex="0" data-toggle="popover" data-container="body" data-popover-content="#a1" data-placement="bottom">Phrase List</a>':'<div><span class="badge">Speak</span><span class="badge-nos">'+phrase+'</span></div>' %>
+  <%= signup? '<a href="#" class="btn btn-primary" tabindex="0" data-toggle="popover" data-container="body" data-popover-content="#a1" data-trigger="focus" data-placement="bottom" >Phrase List</a>':'<div><span class="badge">Speak</span><span class="badge-nos">'+phrase+'</span></div>' %>
     <br />
     <h4>Voice Graph</h4>
     <!--canvas id="analyser" width="1024" height="500"></canvas-->

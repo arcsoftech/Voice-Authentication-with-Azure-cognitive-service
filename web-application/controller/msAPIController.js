@@ -161,8 +161,14 @@ module.exports = Account => {
                         encoding: null,
                     };
                     request(ConvertOptions).pipe(request(options, function (error, response, body) {
-                        if (error) res.status(401).send(error.message)
+                        if (error) {
+                            console.error("Error message", err);
+                            res.status(400).json({
+                                error: error.message
+                            })
+                        }
                         body = JSON.parse(body.toString('utf8'))
+                        console.log(body);
                         if (body.result == "Accept") {
                             let options = {
                                 httpOnly: true, // The cookie only accessible by the web server
@@ -177,11 +183,12 @@ module.exports = Account => {
                             // Set cookie
                             res.cookie('ms-token', token, options);
                             console.log(body);
-                            res.send({
+                            res.json({
                                 SuccessMsg: "Voice Verified SuccessFull"
                             })
                         } else {
-                            res.status(401).send({
+                            console.log("User Unauthenticated");
+                            res.status(400).json({
                                 Reason: "Voice verfication failed"
                             })
                         }
