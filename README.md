@@ -25,7 +25,9 @@ WavConverter has dependency on "ffmpeg".
 
 - [x] Developer: Arihant Chhajed (Arcsoftech)
 - [x] Contact: arihant_chhajed@yahoo.in
-- [x] Twitter: @arihantchhajed
+- [x] Twitter: @arihantchhajed | @arcsoftech
 - [x] LinkedIn: https://www.linkedin.com/in/arihant-chhajed-06b1762b
 
-## Note:- I am using here Mysql database for storing authentication credentials. You can use your own database if you want in place of that.
+## 3-Note
+
+I am using here Mysql database for storing authentication credentials. You can use your own database if you want in place of that.
