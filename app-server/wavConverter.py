@@ -21,7 +21,6 @@ print(os.getenv("PASSWORD"))
 class User(UserMixin):
     # proxy for a database of users
     user_database = {"guest": (os.getenv("USER"), os.getenv("PASSWORD"))}
-
     def __init__(self, username, password):
         self.id = username
         self.password = password
@@ -60,23 +59,24 @@ def input_wav_2_output_wav():
     """
     print("Request recieved for file conversion")
     if request.data:
-        save_path = "temp/"
-        files = glob.glob('temp/*')
+        save_path = "/home/arcsoftech/temp/"
+        files = glob.glob('/home/arcsoftech/temp/*')
         for f in files:
+            print(files)
             os.remove(f)
         input_file_name = "input"
         file_url = os.path.join(save_path, input_file_name + ".wav")
-        print(file_url)
-        with open(file_url, "w+b") as file:
+        print("Saving File...",file_url)
+        with open(file_url, "wb") as file:
             file.write(request.data)
 
-        convert = Popen("ffmpeg -i temp/input.wav -acodec pcm_s16le -ac 1 -ar 16000 temp/output.wav",
+        convert = Popen("ffmpeg -i /home/arcsoftech/temp/input.wav -acodec pcm_s16le -ac 1 -ar 16000 /home/arcsoftech/temp/output.wav",
                         shell=True, stdin=PIPE, stdout=PIPE, universal_newlines=True)
         newline = os.linesep
         commands = ['y']
         convert.communicate(newline.join(commands))
         if convert.returncode == 0:
-            return send_file('temp/output.wav', attachment_filename='ouput.wav')
+            return send_file('/home/arcsoftech/temp/output.wav', attachment_filename='ouput.wav')
         return "File conversion failed", 400
 
     return "No file found", 422
@@ -96,5 +96,6 @@ if __name__ == "__main__":
         print("Server started")
         APP.run(host='0.0.0.0', port=1338)
         print("app started at port 1338")
+        
     except():
         print("An unexpected error occured")

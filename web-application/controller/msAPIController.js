@@ -76,6 +76,7 @@ module.exports = Account => {
                 };
                 request(options, function (error, response, body) {
                     if (error) res.send(error.message)
+                    console.log("Phrases Reoponse",body)
                     res.send(body)
                 });
 
@@ -112,6 +113,7 @@ module.exports = Account => {
                     };
                     request(ConvertOptions).pipe(request(options, function (error, response, body) {
                         if (error) res.send(error.message)
+                        console.log("Conversion",body)
                         body = JSON.parse(body.toString('utf8'))
                         Account.update({
                                 voiceEnrolledCount: body.enrollmentsCount,
@@ -122,7 +124,9 @@ module.exports = Account => {
                                 }
                             })
                             .then(function (rowsUpdated) {
+                                console.log("enrolment Logs",body)
                                 res.send(body)
+                               
                             })
                             .catch(err => {
                                 res.status(422).send(err)
