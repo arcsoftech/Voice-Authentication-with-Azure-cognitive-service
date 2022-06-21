@@ -1,6 +1,6 @@
 Flask==1.0.2
 Flask-Cors==3.0.6
 Flask-Login==0.4.1
-numpy==1.15.1
+numpy==1.22.0
 python-dotenv==0.9.1
 scipy==1.1.0
